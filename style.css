@@ -252,6 +252,16 @@ nav a:hover:after {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Estiliza o texto "Não tem uma conta? Cadastre-se" no rodapé do card */
+.login-footer-text {
+    display: block;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 20px;
+    color: var(--azul-escuro);
+}
+
 .dark-mode .hero-image-sub {
     border-color: #333333;
 }

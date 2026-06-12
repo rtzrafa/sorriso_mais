@@ -207,7 +207,14 @@
             font-size: 4rem;
             font-weight: 700;
             line-height: 1.1;
-            max-width: 500px;
+            max-width: 400px;
+            color: var(--azul-principal);
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+            background-color: rgba(255, 255, 255, 0.120);
+            padding: 10px;
+            border-radius: 20px;
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
         }
 
         /* Formulário flutuante */
@@ -267,9 +274,17 @@
             position: relative;
             z-index: 2;
             text-align: center;
+            margin: auto;
             margin-top: 50px;
-            padding-top: 20px;
-            width: 100%;
+            padding: 20px;
+            max-width: 700px;
+            color: var(--azul-principal);
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+            background-color: rgba(255, 255, 255, 0.120);
+            padding: 10px;
+            border-radius: 20px;
+            backdrop-filter: blur(1.5px);
+            -webkit-backdrop-filter: blur(1.5px);
         }
 
         .hero-footer p {
@@ -641,21 +656,22 @@
                 <h1>Sorria com confiança</h1>
             </div>
             <div class="hero-booking-form">
-                <h3>Agende sua consulta!</h3>
+                <h3>Fazer Login!</h3>
                 <form class="clinic-form">
                     <div class="form-group">
                         <label>Nome</label>
                         <input type="text" name="nome" required>
                     </div>
                     <div class="form-group">
-                        <label>Telefone</label>
-                        <input type="tel" name="telefone" required>
+                        <label>Email</label>
+                        <input type="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label>Motivo</label>
-                        <textarea name="motivo" required></textarea>
+                        <label>Senha</label>
+                        <input type="password" name="senha" required>
                     </div>
-                    <button type="submit" class="btn-principal btn-booking">Agendar Avaliação</button>
+                    <button type="submit" class="btn-principal btn-booking">Entrar</button>
+                    <a href="#" class="login-footer-text">Não tem uma conta? Cadastre-se</a>
                 </form>
             </div>
         </div>
@@ -806,7 +822,7 @@
                 </div>
             </div>
             <div class="booking">
-                <h2>Solicite seu agendamento</h2>
+                <h2>Fazer Login!</h2>
                 <form class="clinic-form">
                     <div class="form-row">
                         <div class="col form-group">
@@ -816,17 +832,18 @@
                     </div>
                     <div class="form-row">
                         <div class="col form-group">
-                            <label>Telefone</label>
-                            <input type="tel" name="telefone" required>
+                            <label>Email</label>
+                            <input type="email" name="email" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col form-group">
-                            <label>Motivo</label>
-                            <textarea name="motivo" required></textarea>
+                            <label>Senha</label>
+                            <input type="password" name="senha" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn-principal">Agendar Avaliação</button>
+                    <button type="submit" class="btn-principal btn-booking">Agendar Avaliação</button> <br>
+                    <a href="#" class="login-footer-text-map">Não tem uma conta? Cadastre-se</a>
                 </form>
             </div>
         </div>
