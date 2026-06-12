@@ -35,8 +35,8 @@
         /* --- CARD DE VIDRO FOSCO (Glassmorphism) --- */
         .glass-card {
             background: rgba(255, 255, 255, 0.45); /* Transparência do vidro */
-            backdrop-filter: blur(15px); /* Efeito embaçado do fundo */
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(5px); /* Efeito embaçado do fundo */
+            -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 25px;
             padding: 40px 35px;
@@ -64,6 +64,10 @@
 
         .logo-container h1 span {
             color: #007bff; /* Mais azul do '+' */
+        }
+
+        label {
+
         }
 
         .subtitulo-logo {
@@ -190,41 +194,44 @@
                 <div class="subtitulo-logo">Clínica Odontológica</div>
             </div>
 
-            <!-- Formulário Dinâmico -->
-            <form id="formAcesso" onsubmit="event.preventDefault();">
-                
-                <!-- Campo Nome (Começa oculto no modo Login) -->
-                <div class="form-grupo" id="grupo-nome" style="display: none;">
-                    <label for="nome">Nome Completo</label>
-                    <input type="text" id="nome" placeholder="Digite seu nome">
-                </div>
+                <form id="formAcesso" onsubmit="event.preventDefault();">
+    
+                    <input type="hidden" id="tipo_acao" name="tipo_acao" value="login_paciente">
 
-                <!-- Campo E-mail -->
-                <div class="form-grupo">
-                    <label id="label-usuario" for="email">E-mail ou ID do Responsável</label>
-                    <input type="text" id="email" required>
-                </div>
-
-                <!-- Campo Senha -->
-                <div class="form-grupo">
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" required oninput="validarSenha()">
-                    
-                    <!-- Barra de força (Cadastro) -->
-                    <div class="medidor-container" id="medidor-senha">
-                        <div id="barra-forca"></div>
+                    <div class="form-grupo" id="grupo-nome" style="display: none;">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" placeholder="Digite o nome completo">
                     </div>
-                    <span id="texto-forca"></span>
-                </div>
 
-                <!-- Botão de Ação Principal -->
-                <button type="submit" class="btn-entrar" id="btn-submit">
-                    <span id="icone-btn">➔</span> <span id="texto-btn">Entrar na Conta</span>
-                </button>
+                    <div class="form-grupo" id="grupo-cpf">
+                        <label for="cpf">CPF do Paciente</label>
+                        <input type="text" id="cpf" placeholder="000.000.000-00" required>
+                    </div>
 
-                <!-- Link de Alternância -->
-                <a class="link-alternar" id="link-troca" onclick="alternarTela()">Não tem conta? Cadastre-se</a>
-            </form>
+                    <div class="form-grupo" id="grupo-email-medico" style="display: none;">
+                        <label id="label-usuario" for="email">E-mail ou ID do Responsável</label>
+                        <input type="text" id="email">
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" required oninput="validarSenha()">
+                        
+                        <div class="medidor-container" id="medidor-senha">
+                            <div id="barra-forca"></div>
+                        </div>
+                        <span id="texto-forca"></span>
+                    </div>
+
+                    <button type="submit" class="btn-entrar" id="btn-submit">
+                        <span id="icone-btn">➔</span> <span id="texto-btn">Entrar como Paciente</span>
+                    </button>
+
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+                        <a class="link-alternar" id="link-cadastro" onclick="clicouNoCadastro()">Paciente novo? Cadastre-se aqui</a>
+                        <a class="link-alternar" id="link-tipo-usuario" onclick="clicouNoTipoUsuario()">Fazer login como médico</a>
+                    </div>
+                </form>
 
         </div>
 
@@ -232,55 +239,142 @@
 
     <!-- --- LÓGICA DE INTERAÇÃO (JS) --- -->
     <script>
-        let modoCadastro = false;
+        // Estados possíveis: 'login_paciente', 'cadastro_paciente', 'login_medico', 'cadastro_medico'
+        let telaAtual = 'login_paciente'; 
 
-        function alternarTela() {
-            modoCadastro = !modoCadastro;
+        // Função disparada quando clicam no primeiro link (Cadastrar / Voltar)
+        function clicouNoCadastro() {
+            if (telaAtual === 'login_paciente') {
+                telaAtual = 'cadastro_paciente';
+            } else if (telaAtual === 'cadastro_paciente') {
+                telaAtual = 'login_paciente';
+            } else if (telaAtual === 'login_medico') {
+                telaAtual = 'cadastro_medico';
+            } else if (telaAtual === 'cadastro_medico') {
+                telaAtual = 'login_medico';
+            }
+            atualizarInterface();
+        }
 
+        // Função disparada quando clicam no segundo link (Trocar de Paciente para Médico e vice-versa)
+        function clicouNoTipoUsuario() {
+            if (telaAtual === 'login_paciente') {
+                telaAtual = 'login_medico';
+            } else if (telaAtual === 'login_medico') {
+                telaAtual = 'login_paciente';
+            }
+            atualizarInterface();
+        }
+
+        // Centraliza toda a mudança visual da tela baseada no estado atual
+        function atualizarInterface() {
             const grupoNome = document.getElementById('grupo-nome');
-            const labelUsuario = document.getElementById('label-usuario');
+            const grupoCpf = document.getElementById('grupo-cpf');
+            const grupoEmailMedico = document.getElementById('grupo-email-medico');
             const medidorSenha = document.getElementById('medidor-senha');
             const textoForca = document.getElementById('texto-forca');
             const textoBtn = document.getElementById('texto-btn');
-            const linkTroca = document.getElementById('link-troca');
+            const linkCadastro = document.getElementById('link-cadastro');
+            const linkTipoUsuario = document.getElementById('link-tipo-usuario');
+            const tipoAcaoInput = document.getElementById('tipo_acao');
+            
             const campoNome = document.getElementById('nome');
+            const campoCpf = document.getElementById('cpf');
+            const campoEmail = document.getElementById('email');
             const campoSenha = document.getElementById('senha');
 
-            if (modoCadastro) {
-                // Configura interface para Criar Conta
-                grupoNome.style.display = 'block';
-                campoNome.setAttribute('required', 'true');
-                labelUsuario.innerText = 'E-mail';
-                medidorSenha.style.display = 'block';
-                textoBtn.innerText = 'Criar minha conta';
-                linkTroca.innerText = 'Já possui ID? Fazer Login';
-                campoSenha.value = '';
-                validarSenha();
-            } else {
-                // Volta para o padrão da Imagem (Login)
-                grupoNome.style.display = 'none';
-                campoNome.removeAttribute('required');
-                labelUsuario.innerText = 'E-mail ou ID do Responsável';
+            // Sincroniza o campo oculto do PHP com o estado do JS
+            tipoAcaoInput.value = telaAtual;
+
+            // Limpa a força da senha por segurança ao mudar de tela
+            if (!telaAtual.startsWith('cadastro')) {
                 medidorSenha.style.display = 'none';
                 textoForca.innerText = '';
-                textoBtn.innerText = 'Entrar na Conta';
-                linkTroca.innerText = 'Não tem conta? Cadastre-se';
+            }
+
+            // --- APLICA AS REGRAS DE EXIBIÇÃO ---
+            switch (telaAtual) {
+                
+                case 'login_paciente':
+                    grupoNome.style.display = 'none';
+                    grupoCpf.style.display = 'block';
+                    grupoEmailMedico.style.display = 'none';
+                    
+                    campoNome.removeAttribute('required');
+                    campoCpf.setAttribute('required', 'true');
+                    campoEmail.removeAttribute('required');
+                    
+                    textoBtn.innerText = 'Entrar como Paciente';
+                    linkCadastro.innerText = 'Paciente novo? Cadastre-se aqui';
+                    
+                    linkTipoUsuario.innerText = 'Fazer login como médico';
+                    linkTipoUsuario.style.display = 'inline-block';
+                    break;
+
+                case 'cadastro_paciente':
+                    grupoNome.style.display = 'block';
+                    grupoCpf.style.display = 'block';
+                    grupoEmailMedico.style.display = 'none';
+                    
+                    campoNome.setAttribute('required', 'true');
+                    campoCpf.setAttribute('required', 'true');
+                    campoEmail.removeAttribute('required');
+                    
+                    medidorSenha.style.display = 'block';
+                    textoBtn.innerText = 'Criar Conta de Paciente';
+                    linkCadastro.innerText = 'Já possui conta? Fazer Login';
+                    
+                    linkTipoUsuario.style.display = 'none'; 
+                    validarSenha();
+                    break;
+
+                case 'login_medico':
+                    grupoNome.style.display = 'none';
+                    grupoCpf.style.display = 'none';
+                    grupoEmailMedico.style.display = 'block';
+                    
+                    campoNome.removeAttribute('required');
+                    campoCpf.removeAttribute('required');
+                    campoEmail.setAttribute('required', 'true');
+                    
+                    textoBtn.innerText = 'Entrar na Conta';
+                    linkCadastro.innerText = 'Médico novo? Cadastre-se aqui';
+                    
+                    linkTipoUsuario.innerText = 'Voltar para Login de Paciente';
+                    linkTipoUsuario.style.display = 'inline-block';
+                    break;
+
+                case 'cadastro_medico':
+                    grupoNome.style.display = 'block';
+                    grupoCpf.style.display = 'none';
+                    grupoEmailMedico.style.display = 'block';
+                    
+                    campoNome.setAttribute('required', 'true');
+                    campoCpf.removeAttribute('required');
+                    campoEmail.setAttribute('required', 'true');
+                    
+                    medidorSenha.style.display = 'block';
+                    textoBtn.innerText = 'Criar Conta de Médico';
+                    linkCadastro.innerText = 'Já possui conta? Fazer Login';
+                    
+                    linkTipoUsuario.style.display = 'none'; 
+                    validarSenha();
+                    break;
             }
         }
 
         function validarSenha() {
-            if (!modoCadastro) return; // Só valida força de senha se for Cadastro
+            if (!telaAtual.startsWith('cadastro')) return; 
 
             const senha = document.getElementById('senha').value;
             const barra = document.getElementById('barra-forca');
             const texto = document.getElementById('texto-forca');
             
-            let pontos = 0;
-
-            if (senha.length >= 6) pontos += 1;
-            if (senha.match(/[0-9]/)) pontos += 1;
-            if (senha.match(/[A-Z]/)) pontos += 1;
-            if (senha.match(/[^A-Za-z0-9]/)) pontos += 1;
+            let points = 0;
+            if (senha.length >= 6) points += 1;
+            if (senha.match(/[0-9]/)) points += 1;
+            if (senha.match(/[A-Z]/)) points += 1;
+            if (senha.match(/[^A-Za-z0-9]/)) points += 1;
 
             if (senha.length === 0) {
                 barra.style.width = '0%';
@@ -288,17 +382,17 @@
                 return;
             }
 
-            if (pontos <= 1) {
+            if (points <= 1) {
                 barra.style.width = '30%';
-                barra.style.backgroundColor = '#ff4d4d'; // Vermelho
+                barra.style.backgroundColor = '#ff4d4d'; 
                 texto.innerText = 'Senha Fraca';
-            } else if (pontos === 2 || pontos === 3) {
+            } else if (points === 2 || points === 3) {
                 barra.style.width = '65%';
-                barra.style.backgroundColor = '#ffcc00'; // Amarelo
+                barra.style.backgroundColor = '#ffcc00'; 
                 texto.innerText = 'Senha Média';
             } else {
                 barra.style.width = '100%';
-                barra.style.backgroundColor = '#28a745'; // Verde
+                barra.style.backgroundColor = '#28a745'; 
                 texto.innerText = 'Senha Forte';
             }
         }
