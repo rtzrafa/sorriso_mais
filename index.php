@@ -187,7 +187,7 @@
             justify-content: space-between;
             
             /* Imagem com overlay mais sólido para evitar transparência excessiva */
-            background-image: url(/img_clinica/image\ \(1\).png);
+            background-image: url(img_clinica/image\ \(1\).png);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -627,7 +627,7 @@
     <header>
         <div class="container">
             <a href="#inicio" class="logo">
-                <img src="/img_clinica/logomaior1-removebg-preview.png" alt="Sorriso+ Odontologia">
+                <img src="img_clinica/logomaior1-removebg-preview.png" alt="Sorriso+ Odontologia">
             </a>
             <nav>
                 <ul>
@@ -689,7 +689,7 @@
                 <!-- Card 1 -->
                 <div class="treatment-card">
                     <div class="treatment-image">
-                        <img src="/img_clinica/image (6).png" alt="Lentes de Contato Dentais">
+                        <img src="img_clinica/image (6).png" alt="Lentes de Contato Dentais">
                     </div>
                     <h3>Lentes de Contato</h3>
                     <p>As lentes de contato dentais são facetas ultrafinas de porcelana aplicadas sobre os dentes para corrigir imperfeições e manchas.</p>
@@ -698,7 +698,7 @@
                 <!-- Card 2 -->
                 <div class="treatment-card">
                     <div class="treatment-image">
-                        <img src="/img_clinica/image (9).png" alt="Clareamento Dental">
+                        <img src="img_clinica/image (9).png" alt="Clareamento Dental">
                     </div>
                     <h3>Clareamento Dental</h3>
                     <p>Recupere a brancura original dos seus dentes com procedimentos modernos, seguros e de rápida aplicação clínica.</p>
@@ -707,7 +707,7 @@
                 <!-- Card 3 -->
                 <div class="treatment-card">
                     <div class="treatment-image">
-                        <img src="/img_clinica/image (7).png" alt="Alinhadores Invisíveis">
+                        <img src="img_clinica/image (7).png" alt="Alinhadores Invisíveis">
                     </div>
                     <h3>Alinhadores Invisíveis</h3>
                     <p>Conquiste o alinhamento perfeito de forma discreta, confortável e sem a necessidade de braquetes metálicos.</p>
@@ -716,7 +716,7 @@
                 <!-- Card 4 -->
                 <div class="treatment-card">
                     <div class="treatment-image">
-                        <img src="/img_clinica/image (8).png" alt="Odontologia Digital">
+                        <img src="img_clinica/image (8).png" alt="Odontologia Digital">
                     </div>
                     <h3>Odontologia Digital</h3>
                     <p>Planejamento moderno e escaneamento computadorizado 3D para criar soluções personalizadas com máxima previsibilidade.</p>
@@ -725,7 +725,7 @@
                 <!-- Card 5 -->
                 <div class="treatment-card">
                     <div class="treatment-image">
-                        <img src="/img_clinica/image (10).png" alt="Endodontia avançada">
+                        <img src="img_clinica/image (10).png" alt="Endodontia avançada">
                     </div>
                     <h3>Endodontia</h3>
                     <p>Tratamentos de canal precisos para salvar elementos dentários danificados ou infeccionados com total conforto.</p>
@@ -734,7 +734,7 @@
                 <!-- Card 6 -->
                 <div class="treatment-card">
                     <div class="treatment-image">
-                        <img src="/img_clinica/image (11).png" alt="Ortodontia Especializada">
+                        <img src="img_clinica/image (11).png" alt="Ortodontia Especializada">
                     </div>
                     <h3>Ortodontia</h3>
                     <p>Prevenção e correção dos problemas de crescimento, desenvolvimento e posicionamento da sua estrutura facial.</p>
@@ -747,12 +747,12 @@
     <section id="historia" class="history">
         <div class="container">
             <div class="history-image">
-                <img src="/img_clinica/image.png" alt="Interior da Clínica Sorriso+">
+                <img src="img_clinica/image.png" alt="Interior da Clínica Sorriso+">
             </div>
             <div class="history-text">
                 <div class="history-header">
                     <div class="logo-10-anos">
-                        <img src="/img_clinica/image (4).png" alt="Sorriso+ Ícone">
+                        <img src="img_clinica/image (4).png" alt="Sorriso+ Ícone">
                     </div>
                     <h2>NOSSA HISTÓRIA</h2>
                 </div>
@@ -842,7 +842,7 @@
                             <input type="password" name="senha" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn-principal btn-booking">Agendar Avaliação</button> <br>
+                    <button type="submit" class="btn-principal btn-booking">Entrar</button> <br>
                     <a href="#" class="login-footer-text-map">Não tem uma conta? Cadastre-se</a>
                 </form>
             </div>
@@ -853,7 +853,7 @@
         <div class="container">
             <div class="footer-logo footer-col">
                 <a href="#inicio" class="logo">
-                    <img src="/img_clinica/image (5).png" alt="Sorriso+ Logo Completa">
+                    <img src="img_clinica/image (5).png" alt="Sorriso+ Logo Completa">
                 </a>
                 <div class="footer-logo-text">
                     <p>Rua das Figueiras, nº 1200</p>
