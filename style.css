@@ -1,0 +1,647 @@
+/* ==========================================================================
+   1. VARIÁVEIS DE COR (TEMA CLARO E ESCURO)
+   ========================================================================== */
+:root {
+    /* Cores de base do design original (Tema Claro) */
+    --bg-color-main: #f0f7ff; /* Azul claro de fundo */
+    --text-color-main: #1d2c60; /* Azul escuro de texto */
+    --bg-color-form: #ffffff; /* Branco para cartões e formulários */
+    --border-color-form: #d9e9fb; /* Azul mais claro para bordas */
+    --color-accent: #007bff; /* Azul de destaque (botões, ícones) */
+    --text-color-light: #5a6a8e; /* Azul médio para texto secundário */
+    --color-highlight: #ffffff; /* Branco puro */
+    --card-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+}
+
+/* Modificações para o Tema Escuro */
+.dark-mode {
+    --bg-color-main: #121212; /* Fundo muito escuro */
+    --text-color-main: #e0e6ff; /* Texto azul muito claro */
+    --bg-color-form: #1e1e1e; /* Preto suave para cartões */
+    --border-color-form: #333333; /* Cinza escuro para bordas */
+    --color-accent: #1e90ff; /* Azul claro para realce */
+    --text-color-light: #a0accc; /* Azul médio claro */
+    --card-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   2. RESET GLOBAL E UTILITÁRIOS
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-color-main);
+    color: var(--text-color-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    color: inherit; /* Correção de text-color para color */
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+/* ==========================================================================
+   3. CABEÇALHO (HEADER)
+   ========================================================================== */
+header {
+    background-color: var(--bg-color-main);
+    padding: 30x 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ATUALIZADO: Aumentado de 60px para 85px para dar excelente visibilidade ao logo */
+.logo img {
+    height: 200px;
+    width: auto;
+    object-fit: contain;
+    display: flex;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: var(--text-color-main);
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 10px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+nav a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--color-accent);
+}
+
+nav a:hover:after {
+    width: 100%;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ATUALIZADO: Suporte moderno e polido para os logos vetoriais (SVG) das redes */
+.social-icons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: rgba(0, 123, 255, 0.08); 
+    color: var(--text-color-main);
+    transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-icons a hover {
+    color: #ffffff !important;
+    background-color: var(--color-accent);
+    transform: translateY(-3px);
+}
+
+.social-icons svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* Redes sociais adaptadas para o Modo Escuro */
+.dark-mode .social-icons a {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--text-color-main);
+}
+
+.dark-mode .social-icons a:hover {
+    background-color: var(--color-accent);
+    color: #ffffff !important;
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-color-main);
+    transition: color 0.3s ease;
+}
+
+.theme-btn:hover {
+    color: var(--color-accent);
+}
+
+/* ==========================================================================
+   4. SEÇÃO HERO (TOPO)
+   ========================================================================== */
+/* ATUALIZADO: Trocado de height para min-height para acomodar a nova imagem sem vazar */
+.hero {
+    position: relative;
+    padding-top: 140px; 
+    padding-bottom: 60px;
+    min-height: 100vh; 
+    height: auto;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.9); 
+    z-index: -1;
+}
+
+.dark-mode .hero-bg {
+    filter: brightness(0.6); 
+}
+
+/* ATUALIZADO: Altura flexível para conter o título e imagem perfeitamente */
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: calc(100vh - 200px);
+    height: auto;
+}
+
+/* ATUALIZADO: Alinhamento em coluna para suportar a imagem embaixo do título */
+.hero-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; 
+}
+
+.hero-text h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-color-main);
+}
+
+/* ADICIONADO: Estilização para a nova imagem inserida embaixo do título */
+.hero-image-sub {
+    width: 100%;
+    max-width: 460px; 
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    border: 3px solid var(--border-color-form);
+    object-fit: cover;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dark-mode .hero-image-sub {
+    border-color: #333333;
+}
+
+/* ==========================================================================
+   5. FORMULÁRIOS DE AGENDAMENTO
+   ========================================================================== */
+.booking-form-container, .location-form {
+    background-color: var(--bg-color-form);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    max-width: 450px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.booking-form-container h3, .location-form h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: var(--text-color-main);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--text-color-light);
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--border-color-form);
+    border-radius: 10px;
+    background-color: var(--color-highlight);
+    color: var(--text-color-main);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode .form-group input, .dark-mode .form-group textarea {
+    background-color: #2a2a2a; 
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: var(--color-accent);
+    outline: none;
+}
+
+.form-group textarea {
+    height: 120px;
+    resize: none;
+}
+
+.btn-primary {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    background-color: var(--color-accent);
+    color: var(--color-highlight);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; 
+    transform: translateY(-3px);
+}
+
+.hero-footer {
+    padding-top: 20px;
+}
+
+.hero-footer p {
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.hero-footer h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+/* ==========================================================================
+   6. SEÇÃO TRATAMENTOS
+   ========================================================================== */
+.treatments {
+    padding: 100px 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: var(--text-color-main);
+}
+
+.treatment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
+}
+
+.treatment-card {
+    background-color: var(--bg-color-form);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.treatment-card:hover {
+    transform: translateY(-5px);
+}
+
+.treatment-image-container {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid var(--border-color-form);
+    transition: border-color 0.3s ease;
+}
+
+.treatment-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.treatment-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--text-color-main);
+}
+
+.treatment-card p {
+    font-size: 0.95rem;
+    color: var(--text-color-light);
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   7. SEÇÃO NOSSA HISTÓRIA
+   ========================================================================== */
+.about-us {
+    padding: 100px 0;
+    background-color: var(--bg-color-form);
+    transition: background-color 0.3s ease;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.about-text {
+    flex: 1.2;
+}
+
+.logo-10-anos {
+    width: 120px;
+    margin-bottom: 30px;
+}
+
+.logo-10-anos img {
+    width: 100%;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: var(--text-color-main);
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    color: var(--text-color-main);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   8. SEÇÃO DIFERENCIAIS
+   ========================================================================== */
+.differentials {
+    padding: 100px 0;
+}
+
+.differentials h2, .differentials p {
+    color: var(--text-color-main);
+    margin-bottom: 20px;
+}
+
+.differentials p {
+    font-size: 1.1rem;
+}
+
+.highlight-title {
+    font-size: 2.2rem;
+    margin-top: 40px;
+    margin-bottom: 60px;
+    color: var(--text-color-main);
+}
+
+.differentials-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.differential-card {
+    background-color: var(--bg-color-form);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.differential-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid var(--border-color-form);
+    transition: border-color 0.3s ease;
+}
+
+.icon-container i {
+    font-size: 3rem;
+    color: var(--color-accent);
+}
+
+.differential-card h4 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--text-color-main);
+}
+
+.differential-card p {
+    font-size: 0.9rem;
+    color: var(--text-color-light);
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   9. SEÇÃO LOCALIZAÇÃO
+   ========================================================================== */
+.location {
+    padding: 100px 0;
+}
+
+.location-map {
+    flex: 1;
+}
+
+.location-map h2, .location-form h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: var(--text-color-main);
+}
+
+.map-box {
+    width: 100%;
+    height: 400px;
+    background-color: var(--border-color-form);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.location-details p {
+    font-size: 1.1rem;
+    color: var(--text-color-main);
+}
+
+.location-details i {
+    color: var(--color-accent);
+    margin-right: 10px;
+}
+
+.location-form {
+    flex: 1.2;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.col {
+    flex: 1;
+}
+
+/* ==========================================================================
+   10. RODAPÉ (FOOTER)
+   ========================================================================== */
+footer {
+    padding: 100px 0;
+    background-color: var(--bg-color-main);
+    color: var(--text-color-main);
+    transition: background-color 0.3s ease;
+}
+
+footer .logo-col img {
+    height: 80px;
+}
+
+.footer-col h3 {
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    color: var(--text-color-main);
+}
+
+.footer-col p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.awards-col img {
+    height: 80px;
+}
+
+/* ==========================================================================
+   11. RESPONSIVIDADE
+   ========================================================================== */
+@media (max-width: 992px) {
+    .hero-text h1 {
+        font-size: 3rem;
+    }
+    .flex-container {
+        flex-direction: column;
+    }
+    .treatment-grid, .differentials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-text {
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo img {
+        height: 55px; /* Ajustado proporcionalmente para celular */
+    }
+    nav ul {
+        display: none; 
+    }
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+    .treatment-grid, .differentials-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-col {
+        width: 100%;
+        text-align: center;
+    }
+}
